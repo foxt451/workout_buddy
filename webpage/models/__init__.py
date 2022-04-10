@@ -1,0 +1,1 @@
+from .workout_profile import WorkoutProfile
