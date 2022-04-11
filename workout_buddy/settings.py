@@ -34,6 +34,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 INSTALLED_APPS = [
     'accounts',
     'webpage',
+    'fontawesomefree',
     'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -120,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'workout_buddy' / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -1,1 +1,15 @@
 {% extends 'base_generic.html' %}
+{% block custom_styles %}
+{% load static %}
+<link href="{% static 'webpage/styles.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+{% block header %}
+{% include 'webpage/header.html' %}
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block footer %}
+{% include 'webpage/footer.html' %}
+{% endblock %}
+{% endblock %}
