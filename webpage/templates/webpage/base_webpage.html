@@ -7,7 +7,11 @@
 {% block header %}
 {% include 'webpage/header.html' %}
 {% endblock %}
+{% block container %}
+<div class="container p-2">
 {% block content %}
+{% endblock %}
+</div>
 {% endblock %}
 {% block footer %}
 {% include 'webpage/footer.html' %}
