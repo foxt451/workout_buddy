@@ -6,7 +6,7 @@ from .models import CustomUser
 class ProfileView(LoginRequiredMixin, DetailView):
     model = CustomUser
     
-    def get_object(self, queryset):
+    def get_object(self, queryset=CustomUser):
         if 'pk' in self.kwargs:
             return get_object_or_404(queryset, id=self.kwargs['pk'])
         else:
