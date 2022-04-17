@@ -1,0 +1,23 @@
+{% extends 'webpage/base_webpage.html' %}
+{% block title %}
+{{ object.name|truncatechars:15 }}
+{% endblock %}
+{% block content %}
+
+
+<h2>{{ object.name }}</h2>
+<hr>
+<h4>Description</h4>
+{{ object.description|default:'-'}}
+<h4 class="mt-4">What to take</h4>
+{{ object.need_to_take|default:'-'}}
+<h4 class="mt-4">Duration</h4>
+{{ object.duration|default:'-'}}
+<h4 class="mt-4">Date and time:</h4>
+{{ object.at|default:'-'}}
+<h4 class="mt-4">Creator</h4>
+<a href="{{ object.creator.get_absolute_url }}">
+    {{ object.creator }}
+</a>
+
+{% endblock %}

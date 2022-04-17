@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'accounts',
     'webpage',
     'fontawesomefree',
+    'timezone_field',
     'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'workout_buddy.middleware.timezone.TimezoneMiddleware'
 ]
 
 ROOT_URLCONF = 'workout_buddy.urls'
@@ -127,3 +129,5 @@ STATICFILES_DIRS = [BASE_DIR / 'workout_buddy' / 'static']
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GEOIP_PATH = 'geodata/'

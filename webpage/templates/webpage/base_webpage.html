@@ -1,7 +1,9 @@
 {% extends 'base_generic.html' %}
-{% block custom_styles %}
+{% block custom_media %}
 {% load static %}
 <link href="{% static 'webpage/styles.css' %}" rel="stylesheet">
+{% block custom_media_per_page %}
+{% endblock %}
 {% endblock %}
 {% block body %}
 {% block header %}

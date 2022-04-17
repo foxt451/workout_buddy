@@ -1,0 +1,15 @@
+{% extends 'webpage/base_webpage.html' %}
+{% block title %}
+Workouts
+{% endblock %}
+{% block content %}
+
+
+{% for w in object_list %}
+<div class="my-2">
+{% include 'webpage/workoutsession_card.html'%}
+</div>
+{% endfor %}
+
+
+{% endblock %}

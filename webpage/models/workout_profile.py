@@ -1,5 +1,7 @@
 from accounts.models import CustomUser
 from django.contrib.gis.db import models
+from django.contrib.gis import forms
+from django.urls import reverse
 
 class WorkoutProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
@@ -7,3 +9,7 @@ class WorkoutProfile(models.Model):
     
     def __str__(self) -> str:
         return str(self.user)
+    
+    def get_absolute_url(self):
+        return reverse('accounts:profile', kwargs={'pk': self.user.id})
+    
