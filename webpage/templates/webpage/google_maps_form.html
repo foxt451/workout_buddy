@@ -1,0 +1,69 @@
+{{ form.non_field_errors }}
+{% for field in form %}
+<div>
+    {{ field.errors }}
+    {{ field.label_tag }}<br>
+    {% if field.name in form.location_fields %}
+    {{ field }}
+    {% with id=field.auto_id %}
+    {% if field.value %}
+    {% load webpage %}
+    {% with geom=field.value|to_geom %}
+    {% include 'webpage/google_map.html' with id=id call_additional=True additionalPrefix='inputMapChanneling' put_marker=True y=geom.y x=geom.x %}
+    {% endwith %}
+    {% else %}
+    {% include 'webpage/google_map.html' with id=id call_additional=True additionalPrefix='inputMapChanneling' %}
+    {% endif %}
+    {% if not field.required %}
+    <button id="clearMap{{id}}" class="btn btn-danger my-2" type="button" onclick="clearMarker{{id}}();">Clear</button>
+    {% endif %}
+    <script>
+        function inputMapChanneling{{id}}() {
+            google.maps.event.addListener(map{{id}}, 'click', function (e) {
+                if(marker{{id}} === false) {
+                    //Create the marker.
+                    marker{{id}} = new google.maps.Marker({
+                        position: e.latLng,
+                        map: map{{id}},
+                        draggable: true //make it draggable
+                    });
+                    //Listen for drag events!
+                    google.maps.event.addListener(marker{{id}}, 'dragend', function(event){
+                        markerLocation{{id}}();
+                    });
+                } else {
+                    //Marker has already been added, so just change its location.
+                    marker{{id}}.setPosition(e.latLng);
+                }
+                markerLocation{{id}}();
+            });
+        };
+        function markerLocation{{id}}(){
+            if (marker{{id}} === false) {
+                document.getElementById("{{id}}").value = "";
+            } else {
+            //Get location.
+            const currentLocation = marker{{id}}.getPosition();
+            //Add lat and lng values to a field that we can save.
+            document.getElementById("{{id}}").value = `SRID=4326;POINT (${currentLocation.lng()} ${currentLocation.lat()})`;
+            }
+        }
+
+        function clearMarker{{id}}() {
+            if (marker{{id}} !== false) {
+                marker{{id}}.setMap(null);
+            }
+            marker{{id}} = false;
+            markerLocation{{id}}();
+        }
+    </script>
+    {% endwith %}
+    {% else %}
+    {{ field }}
+    {% endif %}
+    {% if field.help_text %}
+    <p class="help">{{ field.help_text|safe }}</p>
+    {% endif %}
+</div>
+<hr>
+{% endfor %}

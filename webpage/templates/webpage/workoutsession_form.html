@@ -1,6 +1,11 @@
 {% extends 'webpage/base_webpage.html' %}
 {% block custom_media_per_page %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key={{ google_api }}"
+async defer></script>
 {{ form.media }}
+{% comment %} {% load leaflet_tags %}
+{% leaflet_js plugins="forms" %}
+{% leaflet_css plugins="forms" %} {% endcomment %}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 {% endblock %}
@@ -8,28 +13,26 @@
 Session Form
 {% endblock %}
 {% block content %}
-
+{% comment %} <style>
+    {% include 'webpage/leaflet_style.css' %}
+</style> {% endcomment %}
 <form method="post">
     {% csrf_token %}
-    <table class="table table-responsive">
-        {{ form.as_table }}
-    </table>
+    {% include 'webpage/google_maps_form.html' %}
 
     <input type="submit" value="Save">
 </form>
 
 <script>
-
-
-$('#id_at_1').timepicker({
-    timeFormat: 'HH:mm',
-    interval: 30,
-    minTime: '00:00',
-    maxTime: '23:59',
-    startTime: '00:00',
-    dynamic: false,
-    dropdown: true,
-    scrollbar: true
-});
+    $('#id_at_1').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 30,
+        minTime: '00:00',
+        maxTime: '23:59',
+        startTime: '00:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
 </script>
 {% endblock %}

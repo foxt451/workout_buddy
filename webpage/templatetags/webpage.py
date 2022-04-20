@@ -1,5 +1,6 @@
 import random
 from django import template
+from django.contrib.gis.geos import Point, GEOSGeometry
 
 sport_icons = [
     'fa-weight-hanging',
@@ -23,3 +24,7 @@ register = template.Library()
 @register.simple_tag
 def random_sport_icon():
     return random.choice(sport_icons)
+
+@register.filter
+def to_geom(point):
+    return GEOSGeometry(point)

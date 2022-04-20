@@ -4,6 +4,9 @@ Workouts
 {% endblock %}
 {% block content %}
 
+{% if not user.is_anonymous %}
+<a href="{% url 'webpage:wsess-create' %}" class="btn btn-primary">Suggest your workout</a>
+{% endif %}
 
 {% for w in object_list %}
 <div class="my-2">

@@ -41,3 +41,7 @@ header {
         white-space  : nowrap;
     }
 }
+
+.errorlist {
+    color: red;
+}

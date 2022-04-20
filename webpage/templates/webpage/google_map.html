@@ -1,0 +1,29 @@
+<style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map{{id}} {
+    height: {{height|default:'500'}}px;
+  }
+</style>
+<div id="map{{id}}"></div>
+<script>
+  var map{{id}};
+  var marker{{id}} = false;
+  function initMap{{id}}() {
+    const loc = {lat: {{ y|default:'0' }}, lng: {{ x|default:'0' }}};
+    map{{id}} = new google.maps.Map(document.getElementById('map{{id}}'), {
+      center: loc,
+      zoom: {{zoom|default:'12'}}
+    });
+    {% if put_marker %}
+    marker{{id}} = new google.maps.Marker({
+        position: loc,
+        map: map{{id}},
+    });
+    {% endif %}
+    {% if call_additional %}
+    {{ additionalPrefix }}{{ id }}();
+    {% endif %}        
+  }
+  window.addEventListener('load', initMap{{id}});
+</script>

@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 from pathlib import Path
 
@@ -36,6 +39,7 @@ INSTALLED_APPS = [
     'webpage',
     'fontawesomefree',
     'timezone_field',
+    # 'leaflet',
     'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_API_KEY']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,7 +67,7 @@ ROOT_URLCONF = 'workout_buddy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'workout_buddy' / 'templates',],
+        'DIRS': [BASE_DIR / 'workout_buddy' / 'templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'webpage.context_processors.google_api_key'
             ],
         },
     },
@@ -86,6 +93,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# LEAFLET_CONFIG = {
+
+#     # you can use your own
+#     "TILES": 'https://{a|b|c}.tile.opentopomap.org/{z}/{x}/{y}.png',
+#     "DEFAULT_CENTER": (30.52, 50.45),
+#     "DEFAULT_ZOOM": 1,
+#     "MAX_ZOOM": 20,
+#     "MIN_ZOOM": 3,
+#     "SCALE": 'both'
+# }
 
 
 # Password validation

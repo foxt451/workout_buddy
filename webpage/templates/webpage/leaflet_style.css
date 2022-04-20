@@ -1,0 +1,4 @@
+{{height}}
+.leaflet-container {
+    height: {{height|default:'500'}}px;
+}

@@ -1,5 +1,10 @@
 {% extends 'webpage/base_webpage.html' %}
 {% block custom_media_per_page %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key={{ google_api }}"
+async defer></script>
+{% comment %} {% load leaflet_tags %}
+{% leaflet_js plugins="forms" %}
+{% leaflet_css plugins="forms" %} {% endcomment %}
 {{ form.media }}
 {% endblock %}
 {% block title %}
@@ -7,11 +12,14 @@ Edit profile
 {% endblock %}
 {% block content %}
 
+{% comment %} <style>
+    {
+        % include 'webpage/leaflet_style.css'%
+    }
+</style> {% endcomment %}
 <form method="post">
     {% csrf_token %}
-    <table class="table table-responsive">
-        {{ form.as_table }}
-    </table>
+    {% include 'webpage/google_maps_form.html' %}
 
     <input type="submit" value="Save">
 </form>

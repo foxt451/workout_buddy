@@ -2,12 +2,34 @@
 {% block title %}
 {{ object.name|truncatechars:15 }}
 {% endblock %}
+{% block custom_media_per_page %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key={{ google_api }}"
+async defer></script>
+{% comment %} {% load leaflet_tags %}
+{% leaflet_js %}
+{% leaflet_css %} {% endcomment %}
+{% endblock %}
 {% block content %}
-
-
 <h2>{{ object.name }}</h2>
 <hr>
 <h4>Description</h4>
+<hr>
+{% include "webpage/google_map.html" with y=object.location.y x=object.location.x id='map' put_marker=True%}
+
+
+{% comment %} <script>
+    function map_init_basic (map, options) {
+        const latLng = [{{ object.location.y }}, {{ object.location.x }}];
+        const marker = L.marker(latLng);
+        marker.addTo(map);
+        map.setView(latLng, 11);
+    }
+</script>
+<style>
+    {% include 'webpage/leaflet_style.css' %}
+</style>
+{% leaflet_map "location" callback="window.map_init_basic" %} {% endcomment %}
+<hr>
 {{ object.description|default:'-'}}
 <h4 class="mt-4">What to take</h4>
 {{ object.need_to_take|default:'-'}}
