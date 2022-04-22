@@ -17,8 +17,10 @@ Edit profile
         % include 'webpage/leaflet_style.css'%
     }
 </style> {% endcomment %}
+<h3>Profile information</h3>
 <form method="post">
     {% csrf_token %}
+    <div class="alert alert-danger">DO NOT set your location if you have privacy concerns. This info is for public display and other users will be able to estimate where you live</div>
     {% include 'webpage/google_maps_form.html' %}
 
     <input type="submit" value="Save">

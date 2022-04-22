@@ -28,3 +28,10 @@ def random_sport_icon():
 @register.filter
 def to_geom(point):
     return GEOSGeometry(point)
+
+import geopy.distance
+@register.simple_tag
+def distance(pointA, pointB):
+    print(pointA, pointB)
+    dist = geopy.distance.distance(geopy.distance.lonlat(*pointA.tuple), geopy.distance.lonlat(*pointB.tuple)).km
+    return dist

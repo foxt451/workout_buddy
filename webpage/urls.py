@@ -7,5 +7,6 @@ urlpatterns = [
     path('wprofile-edit/', views.WProfileUpdate.as_view(), name='wprofile-edit'),
     path('wsess-create/', views.WSessCreate.as_view(), name='wsess-create'),
     path('wsessions/', views.WSessList.as_view(), name='wsess-list'),
+    path('wbuddies/', views.WProfileList.as_view(), name='wprofile-list'),
     path('wsess/<int:pk>/', views.WSessDetail.as_view(), name='wsess-detail')
 ]

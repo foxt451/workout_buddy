@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.gis.geos import Point
 from django.contrib.gis.forms.widgets import OSMWidget
 from . import utils
+from django.contrib.gis.db.models.functions import Distance
 
 
 class WSessCreate(LoginRequiredMixin, CreateView):
@@ -31,8 +32,19 @@ class WSessCreate(LoginRequiredMixin, CreateView):
 
 
 class WSessList(ListView):
+    model = models.WorkoutSession
+    
     def get_queryset(self):
-        return models.WorkoutSession.objects.exclude(at__lt=timezone.now())
+        exclude_outdated = super().get_queryset().exclude(at__lt=timezone.now())
+        user_coords = utils.get_user_coords(self.request)
+        user_point = Point(x=user_coords[1], y=user_coords[0], srid=4326)
+        return exclude_outdated.annotate(distance=Distance('location', user_point)).order_by('distance')
+    
+    # def get_context_data(self):
+    #     ctx = super().get_context_data()
+    #     coords = utils.get_user_coords(self.request)
+    #     ctx['user_loc'] = Point(x=coords[1], y=coords[0])
+    #     return ctx
 
 
 class WSessDetail(DetailView):

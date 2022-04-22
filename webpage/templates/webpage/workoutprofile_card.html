@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ p.user.username }}</h5>
+      <p><b>Full name:</b> {{ p.user.get_full_name|default:'-' }}</p>
+      <p class="my-1">{{ p.distance.km|floatformat:"-1" }} km</p>
+      <a href="{{ p.get_absolute_url }}" class="btn btn-primary">See details</a>
+    </div>
+  </div>
