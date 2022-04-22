@@ -40,11 +40,11 @@ class WSessList(ListView):
         user_point = Point(x=user_coords[1], y=user_coords[0], srid=4326)
         return exclude_outdated.annotate(distance=Distance('location', user_point)).order_by('distance')
     
-    # def get_context_data(self):
-    #     ctx = super().get_context_data()
-    #     coords = utils.get_user_coords(self.request)
-    #     ctx['user_loc'] = Point(x=coords[1], y=coords[0])
-    #     return ctx
+    def get_context_data(self):
+        ctx = super().get_context_data()
+        coords = utils.get_user_coords(self.request)
+        ctx['user_loc'] = coords
+        return ctx
 
 
 class WSessDetail(DetailView):

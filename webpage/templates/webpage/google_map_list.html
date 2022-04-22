@@ -1,0 +1,23 @@
+{% include 'webpage/google_map.html' with id=id y=y x=x call_additional=True additionalPrefix='populateMarkers' %}
+<script>
+    function populateMarkers{{id}}() {
+        {% for obj in object_list %}
+        const marker{{forloop.counter}}_{{id}} = new google.maps.Marker({
+            position: {lat: {{ obj.location.y }}, lng: {{ obj.location.x }}},
+            map: map{{id}},
+            title: '{{ obj.name }}',
+        });
+        const infowindow{{forloop.counter}}_{{id}} = new google.maps.InfoWindow({
+            content: `{% include 'webpage/marker_infowindow.html' with link=obj.get_absolute_url name=obj.name description=obj.description %}`,
+        });
+        
+        marker{{forloop.counter}}_{{id}}.addListener("click", () => {
+            infowindow{{forloop.counter}}_{{id}}.open({
+              anchor: marker{{forloop.counter}}_{{id}},
+              map{{id}},
+              shouldFocus: false,
+            });
+        });        
+        {% endfor%}
+    }
+</script>

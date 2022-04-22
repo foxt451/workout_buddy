@@ -1,4 +1,8 @@
 {% extends 'webpage/base_webpage.html' %}
+{% block custom_media_per_page %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key={{ google_api }}"
+async defer></script>
+{% endblock %}
 {% block title %}
 Workouts
 {% endblock %}
@@ -7,6 +11,10 @@ Workouts
 {% if not user.is_anonymous %}
 <a href="{% url 'webpage:wsess-create' %}" class="btn btn-primary">Suggest your workout</a>
 {% endif %}
+
+<div class="my-2">
+{% include 'webpage/google_map_list.html' with x=user_loc.1 y=user_loc.0 %}
+</div>
 
 {% for w in object_list %}
 <div class="my-2">

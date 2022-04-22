@@ -5,8 +5,10 @@ from webpage import forms
 
 from django.contrib.gis.geoip2 import geoip2
 from . import utils
+from django.db.models.functions import Concat
 from django.contrib.gis.geos import Point
 from webpage import models
+from django.db.models import F, Value
 from django.shortcuts import get_object_or_404
 from django.contrib.gis.forms.widgets import OSMWidget
 from django.contrib.gis.db.models.functions import Distance
@@ -33,8 +35,17 @@ class WProfileUpdate(LoginRequiredMixin, UpdateView):
 class WProfileList(ListView):
     model = models.WorkoutProfile
     
+    def get(self, request, *args, **kwargs):
+        self.user_coords = utils.get_user_coords(self.request)
+        return super().get(request, *args, **kwargs)
+    
     def get_queryset(self):
-        initial = super().get_queryset().exclude(user=self.request.user)
-        user_coords = utils.get_user_coords(self.request)
-        user_point = Point(x=user_coords[1], y=user_coords[0], srid=4326)
+        initial = super().get_queryset().exclude(user=self.request.user).annotate(location=F('residence_location'), name=Concat(F('user__first_name'), Value(' '), F('user__last_name')), description=F('user__username'))
+        print(initial.query)
+        user_point = Point(x=self.user_coords[1], y=self.user_coords[0], srid=4326)
         return initial.annotate(distance=Distance('residence_location', user_point)).order_by('distance')
+    
+    def get_context_data(self):
+        ctx = super().get_context_data()
+        ctx['user_loc'] = self.user_coords
+        return ctx
