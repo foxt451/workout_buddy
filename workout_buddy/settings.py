@@ -23,13 +23,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-sbldo#_h8pff*%0zn)u)h_7*knric@-3i656fw%(eu1^lc45+5'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# SOCIAL_AUTH_JSONFIELD_ENABLED = True
+# AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.google.GoogleOAuth2',
+#     'social_core.backends.github.GithubOAuth2',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
+
+# SOCIAL_AUTH_GITHUB_KEY = os.environ['SOCIAL_AUTH_GITHUB_KEY']
+# SOCIAL_AUTH_GITHUB_SECRET = os.environ['SOCIAL_AUTH_GITHUB_SECRET']
+
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_KEY']
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
+
+# SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
 
 # Application definition
@@ -39,6 +54,7 @@ INSTALLED_APPS = [
     'webpage',
     'fontawesomefree',
     'timezone_field',
+    # 'social_django',
     # 'leaflet',
     'django.contrib.gis',
     'django.contrib.admin',
@@ -93,6 +109,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+import dj_database_url
+DATABASES['default'].update(dj_database_url.config(conn_max_age=600, ssl_require=True))
 
 # LEAFLET_CONFIG = {
 
