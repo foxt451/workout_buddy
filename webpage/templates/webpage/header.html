@@ -42,14 +42,14 @@
                 <ul class="navbar-nav mb-2 me-2 mb-lg-0">
                     {% if user.is_anonymous %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:profile-self' %}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:logout' %}">Log out</a>
+                        <a class="nav-link" href="{% url 'account_logout' %}">Log out</a>
                     </li>
                     {% endif %}
                 </ul>

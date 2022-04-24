@@ -8,9 +8,7 @@ Workouts
 {% endblock %}
 {% block content %}
 
-{% if not user.is_anonymous %}
 <a href="{% url 'webpage:wsess-create' %}" class="btn btn-primary">Suggest your workout</a>
-{% endif %}
 
 <div class="my-2">
 {% include 'webpage/google_map_list.html' with x=user_loc.1 y=user_loc.0 %}

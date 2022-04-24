@@ -29,7 +29,11 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 # SOCIAL_AUTH_JSONFIELD_ENABLED = True
 # AUTHENTICATION_BACKENDS = (
@@ -37,6 +41,40 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 #     'social_core.backends.github.GithubOAuth2',
 #     'django.contrib.auth.backends.ModelBackend',
 # )
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': os.environ['GOOGLE_OAUTH2_CLIENT_ID'],
+            'secret': os.environ['GOOGLE_OAUTH2_CLIENT_SECRET'],
+            'key': '',
+            'VERIFIED_EMAIL': True
+        }
+    },
+    'github': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': os.environ['GITHUB_ID'],
+            'secret': os.environ['GITHUB_SECRET'],
+            'key': '',
+            'VERIFIED_EMAIL': True
+        }
+    }
+}
 
 # SOCIAL_AUTH_GITHUB_KEY = os.environ['SOCIAL_AUTH_GITHUB_KEY']
 # SOCIAL_AUTH_GITHUB_SECRET = os.environ['SOCIAL_AUTH_GITHUB_SECRET']
@@ -50,18 +88,29 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
     'webpage',
+    'accounts',
+    
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    
     'fontawesomefree',
+    
     'timezone_field',
+    
     # 'social_django',
     # 'leaflet',
+    
     'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 ]
 
@@ -110,6 +159,8 @@ DATABASES = {
     }
 }
 
+SITE_ID = 2
+
 import dj_database_url
 DATABASES['default'].update(dj_database_url.config(conn_max_age=600, ssl_require=True))
 
@@ -143,6 +194,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_BACKEND = os.environ.get(
+    'DJANGO_EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST', 'localhost')
+EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_HOST_USER', '')
+EMAIL_PORT = int(os.environ.get('DJANGO_EMAIL_PORT', 25))
+EMAIL_USE_TLS = os.environ.get('DJANGO_EMAIL_USE_TLS', 'False') == 'True'
+EMAIL_USE_SSL = os.environ.get('DJANGO_EMAIL_USE_SSL', 'False') == 'True'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -160,6 +220,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'workout_buddy' / 'static']
 
 # Default primary key field type

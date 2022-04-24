@@ -1,0 +1,54 @@
+{% extends 'webpage/base_webpage.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+{% trans "Login" %}
+{% endblock %}
+
+{% load account socialaccount %}
+{% block content %}
+<h1>{% trans "Sign In" %}</h1>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+
+<div class="socialaccount_ballot">
+
+    <ul class="socialaccount_providers list-group-flush">
+        <li class="list-group-item">
+            <a title="Google sign-in" href="{% provider_login_url "google" %}">
+                <img src="{% static 'accounts/imgs/btn_google_signin_dark_normal_web.png' %}">
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a title="Github sign-in" href="{% provider_login_url "github" %}" class="text-reset text-decoration-none d-inline-block p-1 rounded border">
+                <img src="{% static 'accounts/imgs/GitHub-Mark-32px.png' %}"> <span class="mx-2">Sign in with Github</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="login-or">{% trans 'or' %}</div>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+{% endif %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    <table class="table table-responsive">
+        {{ form.as_table }}
+    </table>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+    <hr>
+    <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+</form>
+
+<p>{% blocktrans %}If you have not created an account yet, then please
+    <a href="{{ signup_url }}" class="btn btn-warning mx-2">Sign up</a> first.{% endblocktrans %}</p>
+
+{% endblock %}
