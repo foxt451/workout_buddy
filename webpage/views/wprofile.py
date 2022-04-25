@@ -40,7 +40,7 @@ class WProfileList(ListView):
         return super().get(request, *args, **kwargs)
     
     def get_queryset(self):
-        initial = super().get_queryset().exclude(user=self.request.user).annotate(location=F('residence_location'), name=Concat(F('user__first_name'), Value(' '), F('user__last_name')), description=F('user__username'))
+        initial = super().get_queryset().exclude(user=self.request.user).exclude(residence_location=None).annotate(location=F('residence_location'), name=Concat(F('user__first_name'), Value(' '), F('user__last_name')), description=F('user__username'))
         print(initial.query)
         user_point = Point(x=self.user_coords[1], y=self.user_coords[0], srid=4326)
         return initial.annotate(distance=Distance('residence_location', user_point)).order_by('distance')

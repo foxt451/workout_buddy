@@ -1,0 +1,8 @@
+<h6>Residence location:</h6>
+<p>
+{% if wprofile.residence_location %}
+{% include "webpage/google_map.html" with y=wprofile.residence_location.y x=wprofile.residence_location.x id='map' put_marker=True%}
+{% else %}
+-
+{% endif %}
+</p>
