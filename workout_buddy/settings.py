@@ -38,7 +38,7 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' if DEBUG else 'https'
 
 ACCOUNT_ADAPTER = 'accounts.adapter.MyAccountAdapter'
-SOCIAL_ACCOUNT_ADAPTER = 'accounts.adapter.MySocialAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'accounts.adapter.MySocialAccountAdapter'
 
 
 # SOCIAL_AUTH_JSONFIELD_ENABLED = True
@@ -66,8 +66,8 @@ SOCIALACCOUNT_PROVIDERS = {
             'client_id': os.environ['GOOGLE_OAUTH2_CLIENT_ID'],
             'secret': os.environ['GOOGLE_OAUTH2_CLIENT_SECRET'],
             'key': '',
-            'VERIFIED_EMAIL': True
-        }
+        },
+        'VERIFIED_EMAIL': True
     }
 }
 
