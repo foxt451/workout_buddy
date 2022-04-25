@@ -1,5 +1,5 @@
 from django.urls import path, include
-from accounts.views import ProfileView, CustomLoginView
+from accounts.views import ProfileView
 
 
 app_name = 'accounts'

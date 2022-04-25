@@ -1,6 +1,7 @@
 {% extends 'webpage/base_webpage.html' %}
+{% load account %}
 {% block title %}
-{{ object.get_full_name }}
+{% user_display user %}
 {% endblock %}
 {% block content %}
 {{ object }}

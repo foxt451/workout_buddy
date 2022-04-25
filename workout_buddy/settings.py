@@ -34,6 +34,12 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' if DEBUG else 'https'
+
+ACCOUNT_ADAPTER = 'accounts.adapter.MyAccountAdapter'
+SOCIAL_ACCOUNT_ADAPTER = 'accounts.adapter.MySocialAccountAdapter'
+
 
 # SOCIAL_AUTH_JSONFIELD_ENABLED = True
 # AUTHENTICATION_BACKENDS = (
@@ -59,17 +65,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'APP': {
             'client_id': os.environ['GOOGLE_OAUTH2_CLIENT_ID'],
             'secret': os.environ['GOOGLE_OAUTH2_CLIENT_SECRET'],
-            'key': '',
-            'VERIFIED_EMAIL': True
-        }
-    },
-    'github': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': os.environ['GITHUB_ID'],
-            'secret': os.environ['GITHUB_SECRET'],
             'key': '',
             'VERIFIED_EMAIL': True
         }

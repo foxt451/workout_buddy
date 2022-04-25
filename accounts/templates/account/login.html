@@ -15,20 +15,14 @@
 {% if socialaccount_providers %}
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
   of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-  for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+  for an account and sign in below:{% endblocktrans %}</p>
 
 <div class="socialaccount_ballot">
 
   <ul class="socialaccount_providers list-group-flush">
     <li class="list-group-item">
-      <a title="Google sign-in" href="{% provider_login_url "google" %}">
+      <a title="Google sign-in" href="{% provider_login_url "google" process="login" %}">
         <img src="{% static 'accounts/imgs/btn_google_signin_dark_normal_web.png' %}">
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a title="Github sign-in" href="{% provider_login_url "github" %}"
-        class="text-reset text-decoration-none d-inline-block p-1 rounded border">
-        <img src="{% static 'accounts/imgs/GitHub-Mark-32px.png' %}"> <span class="mx-2">Sign in with Github</span>
       </a>
     </li>
   </ul>
