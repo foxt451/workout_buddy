@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block head_title %}{% trans "E-mail Addresses" %}{% endblock %}
-{% block post_header %}
+{% comment %} {% block post_header %}
 {% if messages %}
 <div>
     {% for message in messages %}
@@ -13,7 +13,7 @@
     {% endfor %}
 </div>
 {% endif %}
-{% endblock %}
+{% endblock %} {% endcomment %}
 
 {% block content %}
     <h1>{% trans "E-mail Addresses" %}</h1>

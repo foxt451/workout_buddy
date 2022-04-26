@@ -10,7 +10,18 @@
 {% include 'webpage/header.html' %}
 {% endblock %}
 {% block post_header %}
-
+{% if messages %}
+<div>
+    {% for message in messages %}
+    {% if forloop.last %}
+    <div class="alert alert-info msg-django"> {{message}}</div>
+    {% endif %}
+    {% endfor %}
+</div>
+<script>
+$(() => $(".msg-django").show().delay(5000).fadeOut());
+</script>
+{% endif %}
 {% endblock %}
 {% block container %}
 <div class="container p-2">

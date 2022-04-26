@@ -14,9 +14,10 @@ async defer></script>
         {% include 'registration/profile_detail.html' with profile=object %}
         <h3>Email <a href="{% url 'account_email' %}"><i class="fa-solid fa-edit"></i></a></h3>
         <p>{{ object.email }}</p>
+        <h3>Google connections <a href="{% url 'socialaccount_connections' %}"><i class="fa-solid fa-edit"></i></a></h3>
     </div>
     <div class="col-md-8">
-        <h3>Workout info <a href="{% url 'accounts:profile-edit' %}"><i class="fa-solid fa-edit"></i></a></h3>
+        <h3>Workout info <a href="{% url 'webpage:wprofile-edit' %}"><i class="fa-solid fa-edit"></i></a></h3>
         {% include 'webpage/workoutprofile_detail.html' with wprofile=object.workoutprofile %}
     </div>
 </div>
