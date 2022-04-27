@@ -18,6 +18,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'webpage:wsess-list' %}">Workouts nearby</a>
                     </li>
+                    {% if not user.is_anonymous %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'webpage:wsess-list-own' request.user.pk %}">My Workouts</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'webpage:wprofile-list' %}">Buddies nearby</a>
                     </li>

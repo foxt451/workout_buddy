@@ -4,7 +4,7 @@
     <h3>Email <a href="{% url 'account_email' %}"><i class="fa-solid fa-edit"></i></a></h3>
     <p>{{ object.email }}</p>
     <h3>Google connections <a href="{% url 'socialaccount_connections' %}"><i class="fa-solid fa-edit"></i></a></h3>
-    <h3>Set password <a href="{% url 'account_set_password' %}"><i class="fa-solid fa-edit"></i></a></h3>
+    <h3>Manage password <a href="{% url 'account_set_password' %}"><i class="fa-solid fa-edit"></i></a></h3>
 </div>
 <div class="col-md-8">
     <h3>Workout info {% if object.workoutprofile %}<a href="{% url 'webpage:wprofile-edit' %}"><i class="fa-solid fa-edit"></i></a>{% endif %}</h3>

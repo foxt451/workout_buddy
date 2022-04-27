@@ -1,10 +1,15 @@
 {% comment %} {% load webpage %} {% endcomment %}
 <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">{{ w.name }}</h5>
-      {% if w.at %}<h6 class="card-subtitle mb-2 text-muted">{{ w.at }}</h6>{% endif %}
-      <p class="my-1">{% comment %}{% distance user_loc w.location as distance_res %}{% endcomment %}{{ w.distance.km|floatformat:"-1" }} km</p>
-      <p class="card-text">{{ w.description|truncatechars:200}}</p>
-      <a href="{{ w.get_absolute_url }}" class="btn btn-primary">See details</a>
-    </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ w.name }} {% if w.creator == request.user %}<a
+        href="{% url 'webpage:wsess-edit' pk=w.id %}"><i class="fa-solid fa-edit"></i></a>{% endif %}
+      {% if 'webpage.delete_workoutsession' in perms or w.creator == request.user %}<a href="{% url 'webpage:wsess-delete' pk=w.id %}"><i
+          class="fa-solid fa-trash text-danger"></i></a>{% endif %}</h5>
+    {% if w.at %}<h6 class="card-subtitle mb-2 text-muted">{{ w.at }}</h6>{% endif %}
+    <p class="my-1">
+      {% comment %}{% distance user_loc w.location as distance_res %}{% endcomment %}{{ w.distance.km|floatformat:"-1" }}
+      km</p>
+    <p class="card-text">{{ w.description|truncatechars:200}}</p>
+    <a href="{{ w.get_absolute_url }}" class="btn btn-primary">See details</a>
   </div>
+</div>
