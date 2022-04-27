@@ -5,6 +5,7 @@ app_name = 'webpage'
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
     path('wprofile/edit/', views.WProfileUpdate.as_view(), name='wprofile-edit'),
+    path('wprofile/create/', views.WProfileCreate.as_view(), name='wprofile-create'),
     path('wsess/create/', views.WSessCreate.as_view(), name='wsess-create'),
     path('wsessions/', views.WSessList.as_view(), name='wsess-list'),
     path('wbuddies/', views.WProfileList.as_view(), name='wprofile-list'),

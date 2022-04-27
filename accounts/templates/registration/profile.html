@@ -1,24 +1,17 @@
 {% extends 'webpage/base_webpage.html' %}
 {% block custom_media_per_page %}
-<script src="https://maps.googleapis.com/maps/api/js?v=3&key={{ google_api }}"
-async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key={{ google_api }}" async defer></script>
 {% endblock %}
 {% load account %}
 {% block title %}
-{% user_display user %}
+{% user_display object %}
 {% endblock %}
 {% block content %}
 <div class="row">
-    <div class="col-md-4">
-        <h3>Account settings <a href="{% url 'accounts:profile-edit' %}"><i class="fa-solid fa-edit"></i></a></h3>
-        {% include 'registration/profile_detail.html' with profile=object %}
-        <h3>Email <a href="{% url 'account_email' %}"><i class="fa-solid fa-edit"></i></a></h3>
-        <p>{{ object.email }}</p>
-        <h3>Google connections <a href="{% url 'socialaccount_connections' %}"><i class="fa-solid fa-edit"></i></a></h3>
-    </div>
-    <div class="col-md-8">
-        <h3>Workout info <a href="{% url 'webpage:wprofile-edit' %}"><i class="fa-solid fa-edit"></i></a></h3>
-        {% include 'webpage/workoutprofile_detail.html' with wprofile=object.workoutprofile %}
-    </div>
+    {% if object == request.user %}
+    {% include 'registration/profile_personal.html' %}
+    {% else %}
+    {% include 'registration/profile_overview.html' %}
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,0 +1,16 @@
+<div class="col-md-4">
+    <h3>Account settings <a href="{% url 'accounts:profile-edit' %}"><i class="fa-solid fa-edit"></i></a></h3>
+    {% include 'registration/profile_detail.html' with profile=object %}
+    <h3>Email <a href="{% url 'account_email' %}"><i class="fa-solid fa-edit"></i></a></h3>
+    <p>{{ object.email }}</p>
+    <h3>Google connections <a href="{% url 'socialaccount_connections' %}"><i class="fa-solid fa-edit"></i></a></h3>
+    <h3>Set password <a href="{% url 'account_set_password' %}"><i class="fa-solid fa-edit"></i></a></h3>
+</div>
+<div class="col-md-8">
+    <h3>Workout info {% if object.workoutprofile %}<a href="{% url 'webpage:wprofile-edit' %}"><i class="fa-solid fa-edit"></i></a>{% endif %}</h3>
+    {% if object.workoutprofile %}
+    {% include 'webpage/workoutprofile_detail.html' with wprofile=object.workoutprofile %}
+    {% else %}
+    You don't have a workout profile yet. <br><a class="btn btn-success my-2" href="{% url 'webpage:wprofile-create' %}">Create?</a>
+    {% endif %}
+</div>

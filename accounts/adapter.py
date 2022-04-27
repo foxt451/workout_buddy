@@ -57,6 +57,9 @@ class MySocialAccountAdapter(DefaultSocialAccountAdapter):
     
     # ASSUMING GOOGLE EMAILS ARE ALWAYS VERIFIED    
     def pre_social_login(self, request, sociallogin, *args, **kwargs):
+        if sociallogin.state['process'] == 'connect':
+            return
+        
         if sociallogin.is_existing:
             return
 

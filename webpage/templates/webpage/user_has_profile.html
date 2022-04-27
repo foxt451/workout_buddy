@@ -1,0 +1,10 @@
+{% extends 'webpage/base_webpage.html' %}
+{% block title %}
+Profile exists
+{% endblock %}
+{% block content %}
+
+<h3>Sorry, you already have a workout profile</h3>
+
+<a href="{% url 'webpage:wprofile-edit' %}" class="btn btn-primary my-2">Edit profile</a>
+{% endblock %}

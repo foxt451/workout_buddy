@@ -1,0 +1,11 @@
+<div class="col-md-4">
+    {% include 'registration/profile_detail.html' with profile=object hide_personal=True %}
+</div>
+<div class="col-md-8">
+    <h3>Workout profile</h3>
+    {% if object.workoutprofile %}
+    {% include 'webpage/workoutprofile_detail.html' with wprofile=object.workoutprofile %}
+    {% else %}
+    This user doesn't have a workout profile yet.
+    {% endif %}
+</div>
