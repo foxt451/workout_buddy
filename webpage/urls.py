@@ -15,6 +15,7 @@ urlpatterns = [
     path('wsess/<int:pk>/', views.WSessDetail.as_view(), name='wsess-detail'),
     path('wsess-edit/<int:pk>/', views.WSessUpdate.as_view(), name='wsess-edit'),
     path('wsess-delete/<int:pk>/', views.WSessDelete.as_view(), name='wsess-delete'),
-    path('chat/<int:user_id>/', views.room, name='room'),
-    path('chats/', views.chat_list, name='chat_list'),
+    path('wsess-delete/<int:pk>/', views.WSessDelete.as_view(), name='wsess-delete'),
+    
+    path('reactions/interested/', views.SayInterested.as_view(), name='say-interested'),
 ]
