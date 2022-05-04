@@ -21,7 +21,7 @@ class WSessForm(ModelForm):
     
     class Meta:
         model = models.WorkoutSession
-        fields = ['name', 'at', 'need_to_take', 'duration', 'description', 'location']
+        fields = ['name', 'at', 'need_to_take', 'duration', 'description', 'location', 'how_to_contact']
         error_messages = {
             'location': {
                 'required': _("Please, provide a location"),

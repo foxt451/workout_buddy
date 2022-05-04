@@ -16,6 +16,4 @@ urlpatterns = [
     path('wsess-edit/<int:pk>/', views.WSessUpdate.as_view(), name='wsess-edit'),
     path('wsess-delete/<int:pk>/', views.WSessDelete.as_view(), name='wsess-delete'),
     path('wsess-delete/<int:pk>/', views.WSessDelete.as_view(), name='wsess-delete'),
-    
-    path('reactions/interested/', views.SayInterested.as_view(), name='say-interested'),
 ]

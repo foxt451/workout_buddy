@@ -13,9 +13,9 @@
       class="fa-solid fa-edit"></i></a>{% endif %} {% if 'webpage.delete_workoutsession' in perms or object.creator == request.user %}<a
     href="{% url 'webpage:wsess-delete' pk=object.id %}"><i class="fa-solid fa-trash text-danger"></i></a>{% endif %}</h2>
 <hr>
-<h4>Description</h4>
-<hr>
 {% include "webpage/google_map.html" with y=object.location.y x=object.location.x id='map' put_marker=True%}
+<hr>
+<h4>Description</h4>
 
 
 {% comment %} <script>
@@ -40,7 +40,6 @@
   }
 </style>
 {% leaflet_map "location" callback="window.map_init_basic" %} {% endcomment %}
-<hr>
 {{ object.description|default:'-'}}
 <h4 class="mt-4">What to take</h4>
 {{ object.need_to_take|default:'-'}}
@@ -48,6 +47,12 @@
 {{ object.duration|default:'-'}}
 <h4 class="mt-4">Date and time:</h4>
 {{ object.at|default:'-'}}
+<h4 class="mt-4">How to contact:</h4>
+{% if user.is_anonymous %}
+<a class="my-2 btn btn-primary" href="{% url 'account_login' %}?next={{request.get_full_path}}">Log in to see</a>
+{% else %}
+{{ object.how_to_contact|default:'-'}}
+{% endif %}
 <h4 class="mt-4">Creator</h4>
 <a href="{{ object.creator.get_absolute_url }}">
   {{ object.creator }}
