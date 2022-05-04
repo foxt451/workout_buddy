@@ -1,0 +1,15 @@
+{% extends 'webpage/base_webpage.html' %}
+{% block title %}
+Chat
+{% endblock %}
+{% block custom_media_per_page %}
+{% load static %}
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" defer></script>
+<script type="module" src="{% static 'webpage/scripts/chatlist.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div class="chat-window">
+    <ul class="chat-list list-group">
+    </ul>
+</div>
+{% endblock %}
