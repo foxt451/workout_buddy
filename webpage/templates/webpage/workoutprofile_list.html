@@ -8,6 +8,10 @@ Buddies
 {% endblock %}
 {% block content %}
 
+{% if not request.user.workoutprofile %}
+<div class="alert alert-primary mb-2">You don't have a profile and therefore other people won't see you. Consider <a href="{% url 'webpage:wprofile-create' %}">adding</a> it</div>
+{% endif %}
+
 <div class="my-2">
     {% include 'webpage/google_map_list.html' with x=user_loc.1 y=user_loc.0 %}
 </div>

@@ -10,7 +10,7 @@ class ProfileFrom(ModelForm):
     location_fields = ['residence_location']
     class Meta:
         model = models.WorkoutProfile
-        fields = ['residence_location']
+        fields = ['residence_location', 'how_to_contact']
         widgets = {
             'residence_location': HiddenInput() 
         }

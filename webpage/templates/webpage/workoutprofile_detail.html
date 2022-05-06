@@ -6,3 +6,15 @@
 -
 {% endif %}
 </p>
+<h6>How to contact:</h6>
+<p>
+{% if wprofile.how_to_contact %}
+{% if request.user.is_anonymous %}
+<a class="my-2 btn btn-primary" href="{% url 'account_login' %}?next={{request.get_full_path}}">Log in to see</a>
+{% else %}
+{{ wprofile.how_to_contact }}
+{% endif %}
+{% else %}
+-
+{% endif %}
+</p>
