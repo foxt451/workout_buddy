@@ -60,7 +60,7 @@ class WProfileCreate(LoginRequiredMixin, CreateView):
     #     utils.set_form_field_widget_to_google_with_default_location(self.request, form, 'residence_location')
     #     return form
     
-class WProfileList(ListView):
+class WProfileList(LoginRequiredMixin, ListView):
     model = models.WorkoutProfile
     
     def get(self, request, *args, **kwargs):

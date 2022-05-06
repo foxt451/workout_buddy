@@ -5,4 +5,9 @@ Home
 {% block content %}
 {% load static %}
 <img src="{% static 'imgs/logo.svg' %}">
+<h1 class="text-center text-success">Explore activities around you!</h1>
+<div class="d-flex flex-column align-items-center">
+<a class="btn btn-danger my-1" href="{% url 'webpage:wsess-list' %}">Workouts nearby</a>
+<a class="btn btn-primary my-1" href="{% url 'webpage:wprofile-list' %}">People nearby</a>
+</div>
 {% endblock %}
