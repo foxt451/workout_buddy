@@ -36,7 +36,7 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    ALLOWED_HOSTS = ['workout-buddy-petpr.herokuapp.com']
+    ALLOWED_HOSTS = ['workout-buddy-hello.herokuapp.com']
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
