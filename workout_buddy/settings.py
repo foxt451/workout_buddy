@@ -239,3 +239,5 @@ STATICFILES_DIRS = [BASE_DIR / 'workout_buddy' / 'static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GEOIP_PATH = 'geodata/'
+
+ADMINS = [('Sviatozar', 'svpetrenko123@gmail.com')]
