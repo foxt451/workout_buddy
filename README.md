@@ -4,3 +4,5 @@ Django app using, among other things:
 * geodjango
 * ip-based geolocation
 * google maps integration
+* 
+https://workout-buddy-hello.herokuapp.com/
