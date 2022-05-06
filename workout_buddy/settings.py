@@ -171,6 +171,8 @@ SITE_ID = 2
 
 import dj_database_url
 DATABASES['default'].update(dj_database_url.config(conn_max_age=600, ssl_require=True))
+if not DEBUG:
+    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 # LEAFLET_CONFIG = {
 
