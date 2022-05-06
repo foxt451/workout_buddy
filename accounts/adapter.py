@@ -28,8 +28,26 @@ class MyAccountAdapter(DefaultAccountAdapter):
         profile = models.WorkoutProfile(user=request.user)
         profile.save()
         return reverse('webpage:wprofile-edit')
+    
+    def get_next_redirect_url(self, request, *args, **kwargs):
+        if not hasattr(request.user, 'workoutprofile'):
+            # create an empty profile for the user and redirect to edit it
+            profile = models.WorkoutProfile(user=request.user)
+            profile.save()
+            return reverse('webpage:wprofile-edit')
+        else:
+            return super().get_next_redirect_url(request, *args, **kwargs)
         
 class MySocialAccountAdapter(DefaultSocialAccountAdapter):
+    def get_next_redirect_url(self, request, *args, **kwargs):
+        if not hasattr(request.user, 'workoutprofile'):
+            # create an empty profile for the user and redirect to edit it
+            profile = models.WorkoutProfile(user=request.user)
+            profile.save()
+            return reverse('webpage:wprofile-edit')
+        else:
+            return super().get_next_redirect_url(request, *args, **kwargs)
+    
     def get_connect_redirect_url(self, request, *args, **kwargs):
         #return super().get_connect_redirect_url(request)
         if not hasattr(request.user, 'workoutprofile'):
